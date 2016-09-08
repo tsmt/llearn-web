@@ -2,39 +2,67 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>WM Watch v2</title>
+  <title>J34 Laundry</title>
   <meta name="description" content="Waschmaschinenstatus">
   <meta name="author" content="Tobias Schmitt">
-
   <link href="favicon.ico" rel="icon" type="image/x-icon" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
-
+  <!-- <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-
-  <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
-    integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="
-        crossorigin="anonymous" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/skeleton.css"> -->
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <script src="mqttws31.js" type="text/javascript"></script>
   <script src="app.js" type="text/javascript"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
 
 </head>
 <body>
-  <div class="container">
+    <nav>
+        <div class="nav-wrapper orange lighten-1 text-white">
+            <a href="#" class="left brand-logo"><i class="material-icons">local_laundry_service</i> J34</a>
+            <ul id="nav-mobile" class="right">
+                <li><i id="daemon_icon" class="material-icons">hotel</i></li>
+                <li><i id="conn_icon" class="material-icons">signal_wifi_off</i></li>
+            </ul>
+        </div>
+    </nav>
     <div class="row">
-      <div class="three column" style="margin-top: 25%">
-        <p>
-            <h2>Die Waschmaschine <span id="wmstatus"></span></h2>
-            Letztes Update: <span id="time"></span>
-        </p>
+      <div class="col s12 m6 l4">
+          <div id="wmstatcard" class="card green lighten-3">
+              <div class="card-content black-text">
+                  <span class="card-title"><i class="material-icons">local_laundry_service</i> Waschmaschine</span>
+                  <p>
+                  <span id="wmstatus"></span> 
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div id="wmtimecardbox" class="col s12 m6 l4 hide">
+          <div class="card grey lighten-2">
+              <div class="card-content black-text">
+                  <span class="card-title"><i class="tiny material-icons">access_time</i> Waschgang gestartet</span>
+                  <p>
+                  <span id="starttime"></span>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="col s12 m6 l4">
+          <div class="card blue-grey lighten-2">
+              <div class="card-content white-text">
+                  <span class="card-title"><i class="tiny material-icons">access_time</i> Letztes Update</span>
+                  <p>
+                  <i class="tiny material-icons">access_time</i> <span id="time"></span>
+                  </p>
+              </div>
+          </div>
       </div>
     </div>
-  </div>
 </body>
 </html>
