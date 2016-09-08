@@ -57,7 +57,7 @@ function onConnectionLost(response) {
 function onMessageArrived(message) {
     var topic = message.destinationName;
     var payload = message.payloadString;
-    if(message.destinationName === "llearnd/device/mState") {
+    if(message.destinationName === "llearnd/machine/state") {
         var mState = parseInt(message.payloadString);
         if(mState < 2) {
             if($("#wmstatcard").hasClass("red")) {
@@ -82,7 +82,7 @@ function onMessageArrived(message) {
             }
             $("#wmstatus").html("... läuft.");
         }
-    } else if (message.destinationName === "llearnd/device/time") {
+    } else if (message.destinationName === "llearnd/time") {
         var d = new Date(parseInt(message.payloadString) * 1000);
         var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         $('#time').html(timestr);
@@ -90,7 +90,7 @@ function onMessageArrived(message) {
         var d = new Date(parseInt(message.payloadString) * 1000);
         var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         $('#starttime').html(timestr);
-    } else if (message.destinationName === "llearnd/status") {
+    } else if (message.destinationName === "llearnd/state") {
         if(message.payloadString === "online") {
             $('#daemon_icon').html("directions_run");
         } else {
