@@ -67,11 +67,7 @@ function onMessageArrived(message) {
             if(!$("#wmtimecardbox").hasClass("hide")) {
                 $("#wmtimecardbox").addClass("hide");
             }
-            if(mState > 0) {
-                $("#wmstatus").html("... ist angeschaltet.");
-            } else {
-                $("#wmstatus").html("... ist ausgeschaltet.");
-            }
+            $("#wmstatus").html("ist frei!");
         } else {
             if($("#wmstatcard").hasClass("green")) {
                 $("#wmstatcard").removeClass("green");
@@ -80,7 +76,7 @@ function onMessageArrived(message) {
             if($("#wmtimecardbox").hasClass("hide")) {
                 $("#wmtimecardbox").removeClass("hide");
             }
-            $("#wmstatus").html("... läuft.");
+            $("#wmstatus").html("ist belegt!");
         }
     } else if (message.destinationName === "llearnd/time") {
         var d = new Date(parseInt(message.payloadString) * 1000);
