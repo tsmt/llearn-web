@@ -1,4 +1,4 @@
-var mqttserv;
+var mqtt;
 
 var reconnectTimeout = 2000;
 
@@ -45,13 +45,16 @@ function MQTTconnect() {
 function onConnect() {
     //$('#status').val('Connected to ' + host + ':' + port + path);
     // Connection succeeded; subscribe to our topic
-    $('#conn_icon').html("signal_wifi_4_bar");
+    $('#connIcon').html("signal_wifi_4_bar");
     mqtt.subscribe(topic, {qos: 0});
+    $("#wmstatcard").removeClass("hide");
+    $("#timecard").removeClass("hide");
     //$('#topic').val(topic);
 }
 function onConnectionLost(response) {
     //setTimeout(MQTTconnect, reconnectTimeout);
-    $('#conn_icon').html("signal_wifi_off");
+    $('#connIcon').html("signal_wifi_off");
+    $('.card').addClass("hide");
     //$('#status').val("connection lost: " + responseObject.errorMessage + ". Reconnecting");
 };
 function onMessageArrived(message) {
@@ -88,15 +91,24 @@ function onMessageArrived(message) {
         $('#starttime').html(timestr);
     } else if (message.destinationName === "llearnd/state") {
         if(message.payloadString === "online") {
-            $('#daemon_icon').html("directions_run");
+            $('#daemonIcon').html("directions_run");
         } else {
-            $('#daemon_icon').html("hotel");
+            $('#daemonIcon').html("hotel");
         }
     }
     //$('#ws').prepend('<li>' + topic + ' = ' + payload + '</li>');
 };
 
 
+
 $(document).ready(function() {
+    $('#connIconDiv').click(function() {
+        if(mqtt.isConnected()) {
+            mqtt.disconnect();
+        } else {
+            MQTTconnect();
+        }
+    });
+
     MQTTconnect();
 });
