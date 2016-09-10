@@ -30,7 +30,6 @@ function MQTTconnect() {
         onSuccess: onConnect,
         onFailure: function (message) {
             console.log("Connection failed:" + message.errorMessage + "Retrying");
-            //$('#status').val("Connection failed: " + message.errorMessage + "Retrying");
             setTimeout(MQTTconnect, reconnectTimeout);
         }
     };
@@ -47,39 +46,42 @@ function onConnect() {
     // Connection succeeded; subscribe to our topic
     $('#connIcon').html("signal_wifi_4_bar");
     mqtt.subscribe(topic, {qos: 0});
-    $("#wmstatcard").removeClass("hide");
-    $("#timecard").removeClass("hide");
+    $("#wmStatCard").removeClass("hide");
+    $("#showIcon").removeClass("hide");
+    $("#daemonIcon").removeClass("hide");
     //$('#topic').val(topic);
 }
 function onConnectionLost(response) {
     //setTimeout(MQTTconnect, reconnectTimeout);
     $('#connIcon').html("signal_wifi_off");
     $('.card').addClass("hide");
+    $("#showIcon").addClass("hide");
+    $("#daemonIcon").addClass("hide");
     //$('#status').val("connection lost: " + responseObject.errorMessage + ". Reconnecting");
-};
+}
 function onMessageArrived(message) {
     var topic = message.destinationName;
     var payload = message.payloadString;
     if(message.destinationName === "llearnd/machine/state") {
         var mState = parseInt(message.payloadString);
         if(mState < 2) {
-            if($("#wmstatcard").hasClass("red")) {
-                $("#wmstatcard").removeClass("red");
-                $("#wmstatcard").addClass("green");
+            if(!$("#wmStatCard").hasClass("green")) {
+                $("#wmStatCard").removeClass("red");
+                $("#wmStatCard").addClass("green");
             }
-            if(!$("#wmtimecardbox").hasClass("hide")) {
-                $("#wmtimecardbox").addClass("hide");
+            if(!$("#wmTimeCard").hasClass("hide")) {
+                $("#wmTimeCard").addClass("hide");
             }
-            $("#wmstatus").html("ist frei!");
+            $("#wmStatus").html("ist frei!");
         } else {
-            if($("#wmstatcard").hasClass("green")) {
-                $("#wmstatcard").removeClass("green");
-                $("#wmstatcard").addClass("red");
+            if(!$("#wmStatCard").hasClass("red")) {
+                $("#wmStatCard").removeClass("green");
+                $("#wmStatCard").addClass("red");
             }
-            if($("#wmtimecardbox").hasClass("hide")) {
-                $("#wmtimecardbox").removeClass("hide");
+            if($("#wmTimeCard").hasClass("hide")) {
+                $("#wmTimeCard").removeClass("hide");
             }
-            $("#wmstatus").html("ist belegt!");
+            $("#wmStatus").html("ist belegt!");
         }
     } else if (message.destinationName === "llearnd/time") {
         var d = new Date(parseInt(message.payloadString) * 1000);
@@ -88,12 +90,26 @@ function onMessageArrived(message) {
     } else if (message.destinationName === "llearnd/machine/lastBegin") {
         var d = new Date(parseInt(message.payloadString) * 1000);
         var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        $('#starttime').html(timestr);
+        $('#startTime').html(timestr);
     } else if (message.destinationName === "llearnd/state") {
         if(message.payloadString === "online") {
             $('#daemonIcon').html("directions_run");
         } else {
             $('#daemonIcon').html("hotel");
+        }
+    } else if (message.destinationName === "llearnd/device/leds") {
+        var leds = message.payloadString.split(',');
+        for(i = 0; i < leds.length; i++) {
+            var ledId = "#settingsLed" + i;
+            if(leds[i] === "1") {
+                if(!$(ledId).hasClass("red-text")) {
+                    $(ledId).addClass("red-text");
+                }
+            } else {
+                if($(ledId).hasClass("red-text")) {
+                    $(ledId).removeClass("red-text");
+                }
+            }
         }
     }
     //$('#ws').prepend('<li>' + topic + ' = ' + payload + '</li>');
@@ -102,12 +118,19 @@ function onMessageArrived(message) {
 
 
 $(document).ready(function() {
-    $('#connIconDiv').click(function() {
+    $('#connIcon').click(function() {
         if(mqtt.isConnected()) {
             mqtt.disconnect();
         } else {
             MQTTconnect();
         }
+    });
+
+    $('#showIcon').click(function() {
+        $("#timeCard").removeClass("hide");
+        $("#wmTimeCard").removeClass("hide");
+        $("#ledCard").removeClass("hide");
+        $(this).addClass("hide");
     });
 
     MQTTconnect();

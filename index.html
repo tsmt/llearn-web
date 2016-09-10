@@ -26,43 +26,76 @@
     <nav>
         <div class="nav-wrapper blue lighten-2 text-white">
             <a href="#" class="left brand-logo"><i class="material-icons">local_laundry_service</i> J34</a>
-            <ul id="nav-mobile" class="right">
+            <ul id="nav-mobile" class="right" style="margin-right: 5px">
+                <li><i id="showIcon" class="material-icons">remove_red_eye</i></li>
                 <li><i id="daemonIcon" class="material-icons">hotel</i></li>
-                <li id="connIconLi"><div id="connIconDiv"><i id="connIcon" class="material-icons">signal_wifi_off</i></div></li>
+                <li><i id="connIcon" class="material-icons">signal_wifi_off</i></li>
             </ul>
         </div>
     </nav>
     <div class="row">
-      <div class="col s12 m6 l4">
-          <div id="wmstatcard" class="card green lighten-3 hide">
-              <div class="card-content white-text">
-                  <span class="card-title"><i class="material-icons">local_laundry_service</i> Waschmaschine</span>
-                  <p>
-                  <span id="wmstatus"></span> 
-                  </p>
+          <div class="col s12 m6 l4 push-l4">
+              <div id="wmStatCard" class="card lighten-4 hide">
+                  <div class="card-content black-text">
+                      <span class="card-title"><i class="material-icons">local_laundry_service</i> Waschmaschine</span>
+                      <p>
+                      <span id="wmStatus"></span>
+                      </p>
+                  </div>
               </div>
           </div>
-      </div>
-      <div id="wmtimecardbox" class="col s12 m6 l4 hide">
-          <div id="wmtimecard" class="card white">
-              <div class="card-content black-text">
-                  <span class="card-title"><i class="tiny material-icons">access_time</i> Waschgang gestartet</span>
-                  <p>
-                  <span id="starttime"></span>
-                  </p>
+          <div id="wmTimeCardBox" class="col s12 m6 l4 pull-l4">
+              <div id="wmTimeCard" class="card white hide">
+                  <div class="card-content black-text">
+                      <span class="card-title"><i class="tiny material-icons">access_time</i> Waschgang gestartet</span>
+                      <p>
+                      <span id="startTime"></span>
+                      </p>
+                  </div>
               </div>
           </div>
-      </div>
-      <div class="col s12 m6 l4">
-          <div id="timecard" class="card white hide">
-              <div class="card-content black-text">
-                  <span class="card-title"><i class="tiny material-icons">access_time</i> Letztes Update</span>
-                  <p>
-                  <span id="time"></span>
-                  </p>
-              </div>
-          </div>
-      </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6 l4 push-l4">
+            <div id="ledCard" class="card grey lighten-4 hide">
+                <div class="card-content black-text">
+                    <span class="card-title"><i class="tiny material-icons">settings</i> Einstellung</span>
+                    <p>
+                        <i id="settingsLed0" class="tiny material-icons">lightbulb_outline</i> Waschen
+                    </p>
+                    <p>
+                        <i id="settingsLed5" class="tiny material-icons">lightbulb_outline</i> Kurz
+                    </p>
+                    <p>
+                        <i id="settingsLed6" class="tiny material-icons">lightbulb_outline</i> Flecken
+                    </p>
+                    <p>
+                        <i id="settingsLed4" class="tiny material-icons">lightbulb_outline</i> Spülstopp
+                    </p>
+                    <p>
+                        <i id="settingsLed1" class="tiny material-icons">lightbulb_outline</i> 1400 U/Min
+                    </p>
+                    <p>
+                        <i id="settingsLed2" class="tiny material-icons">lightbulb_outline</i> 1000 U/Min
+                    </p>
+                    <p>
+                        <i id="settingsLed3" class="tiny material-icons">lightbulb_outline</i> 600 U/Min
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6 l4 push-l4">
+            <div id="timeCard" class="card white hide">
+                <div class="card-content black-text">
+                    <span class="card-title"><i class="tiny material-icons">access_time</i> Letztes Update</span>
+                    <p>
+                    <span id="time"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
