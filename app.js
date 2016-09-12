@@ -81,6 +81,9 @@ function onMessageArrived(message) {
             if($("#wmTimeCard").hasClass("hide")) {
                 $("#wmTimeCard").removeClass("hide");
             }
+            if($("#ledCard").hasClass("hide")) {
+                $("#ledCard").removeClass("hide");
+            }
             $("#wmStatus").html("ist belegt!");
         }
     } else if (message.destinationName === "llearnd/time") {
