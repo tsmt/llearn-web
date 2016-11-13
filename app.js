@@ -97,7 +97,7 @@ function onMessageArrived(message) {
     } else if (message.destinationName === "llearnd/machine/lastBegin") {
         var d = new Date(parseInt(message.payloadString) * 1000);
         var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        $('.startTime').html(timestr);
+        $('#startTime').html(timestr);
     } else if (message.destinationName === "llearnd/state") {
         if(message.payloadString === "online") {
             $('#connIcon').html("signal_wifi_4_bar");
@@ -106,12 +106,20 @@ function onMessageArrived(message) {
         }
     } else if (message.destinationName === "llearnd/learn/text") {
         if(message.payloadString === "rechnen...") {
-            $('.endTime').html(message.payloadString);
+            $('#endTime').html(message.payloadString);
         } else {
             var d = new Date(parseInt(message.payloadString) * 1000);
             var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-            $('.endTime').html(timestr);
+            $('#endTime').html(timestr);
         }
+    } else if (message.destinationName === "llearnd/learn/linreg") {
+        var d = new Date(parseInt(message.payloadString) * 1000);
+        var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        $('#linRegTime').html(timestr);
+    } else if (message.destinationName === "llearnd/learn/ownpred") {
+        var d = new Date(parseInt(message.payloadString) * 1000);
+        var timestr = d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+        $('#ownPredTime').html(timestr);
     } else if (message.destinationName === "llearnd/device/leds") {
         var leds = message.payloadString.split(',');
         for(i = 0; i < leds.length; i++) {
